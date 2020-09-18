@@ -9,7 +9,7 @@ var longitud ='chavez';
 var stamptime ='soplao';
 const fs= require('fs');
 
-app.set('port', 11000);
+app.set('port', 12000);
 
 //ENVIAR ARCHIVOS AL REQUEST
 app.get('/',function(req,res){
@@ -57,7 +57,7 @@ const database = mysql.createConnection({
 
 
 
-var port = (process.argv[2] || 22000);
+var port = (process.argv[2] || 24000);
 
 var server = net.createServer(function(socket){
     console.log('Truck Tracer\n');
