@@ -12,6 +12,26 @@ function readFile(){
 
 				var marca= L.marker([11.01756,-74.85698]);
 
+				const mysql = require('mysql');
+
+
+				const database = mysql.createConnection({
+					host: 'mydata.cfhamhnsbqmg.us-east-1.rds.amazonaws.com',
+					user: 'admin',
+					password: 'database01!',
+					database: 'mydata'
+				});
+
+				//Verificar conexión
+				database.connect((err) => {
+					if(err){
+						throw err;
+					}
+					console.log('Connected to mydata');
+					});
+				
+				
+
        		setInterval(function() {
 
            	 	jQuery.get('Coordenadas.txt', function(txt){
@@ -25,6 +45,13 @@ function readFile(){
 				$("#hour").text(hour);
 
 
+				datosget={latitud: lati,longitud: long,fecha: date, hora: hour}
+				let sql = 'INSERT INTO getdata SET ?';
+				let query = database.query(sql,datosget,(err,result) =>{
+					if(err) throw err;
+				});
+
+				//CARTOGRAFIA
 				var mymap = L.map('issMap').setView([lati, long], 15);
 
 				marca= L.marker([lati,long]);
