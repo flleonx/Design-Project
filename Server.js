@@ -74,7 +74,7 @@ var server = net.createServer(function(socket){
 
         
 
-        datosget={latitud: latitud,longitud: longitud, stamptime: stamptime}
+        datosget={latitud: latitud,longitud: longitud, fecha: stamptime, hora: 'pepe' }
         let sql = 'INSERT INTO getdata SET ?';
         let query = database.query(sql,datosget,(err,result) =>{
                   if(err) throw err;
