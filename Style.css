@@ -1,0 +1,63 @@
+
+
+
+#latlabel{
+	display: inline;
+	color:blue;
+	font-size: 20px;
+	padding: 0px 0px 10px 0px;
+	margin:20px;
+}
+
+#lati{
+	color:red;
+	font-size: 20px;
+	background: white;
+}
+
+#longlabel{
+	display: inline;
+	color:blue;
+	font-size: 20px;
+	padding: 0px 0px 10px 0px;
+	margin:10px;
+}
+
+#long{
+	color:red;
+	font-size: 20px;
+	background: white;
+}
+
+#fechalabel{
+	display: inline;
+	color:blue;
+	font-size: 20px;
+	margin:18px;
+	padding: 0px 0px 50px 0px;
+}
+
+#date{
+	color:red;
+	font-size: 20px;
+	background: white;
+}
+
+#horalabel{
+	display: inline;
+	color:blue;
+	font-size: 20px;
+	padding: 0px 0px 50px 0px;
+	margin:23px;
+}
+
+#hour{
+	color:red;
+	font-size: 20px;
+	background: white;
+}
+
+#issMap{
+	height: 300px;
+
+}
