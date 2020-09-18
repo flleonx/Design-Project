@@ -76,7 +76,7 @@ server.on('message', function(msg, rinfo) {
 
         var latitud= msg.toString('utf8').split("/")[0];
         latitud=  latitud;
-        var longitud= ,msg.toString('utf8').split("/")[1];
+        var longitud= msg.toString('utf8').split("/")[1];
         longitud=  longitud;
         var stamptime= msg.toString('utf8').split("/")[2];
         stamptime= stamptime;
