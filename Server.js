@@ -71,7 +71,7 @@ server.on('error', (err) => {
 
 //    socket.on('data', function(data){
 
-server.on('message', function(msg, rinfo) => {
+server.on('message', function(msg, rinfo) {
   console.log(`server got: ${msg} from ${rinfo.address}:${rinfo.port}`);
 
         var latitud= msg.toString('utf8').split("/")[0];
