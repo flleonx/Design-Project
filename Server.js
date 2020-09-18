@@ -74,16 +74,18 @@ server.on('error', (err) => {
 server.on('message', function(msg, rinfo) {
   console.log(`server got: ${msg} from ${rinfo.address}:${rinfo.port}`);
 
-        var latitud= msg.toString('utf8').split("/")[0];
+        var latitud= msg.toString('utf8').split(";")[0];
         latitud=  latitud;
-        var longitud= msg.toString('utf8').split("/")[1];
+        var longitud= msg.toString('utf8').split(";")[1];
         longitud=  longitud;
-        var stamptime= msg.toString('utf8').split("/")[2];
-        stamptime= stamptime;
+        var fecha= msg.toString('utf8').split(";")[2];
+        fecha= fecha;
+        var hora= msg.toString('utf8').split(";")[2];
+        hora= hora;
 
         
 
-        datosget={latitud: latitud,longitud: longitud, fecha: stamptime, hora: 'pepe' }
+        datosget={latitud: latitud,longitud: longitud, fecha: fecha, hora: hora }
         let sql = 'INSERT INTO getdata SET ?';
         let query = database.query(sql,datosget,(err,result) =>{
                   if(err) throw err;
