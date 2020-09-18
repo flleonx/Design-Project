@@ -9,7 +9,7 @@ var longitud ='x2';
 var stamptime ='x3';
 const fs= require('fs');
 
-app.set('port', 10000);
+app.set('port', 10001);
 
 //ENVIAR ARCHIVOS AL REQUEST
 app.get('/',function(req,res){
@@ -93,7 +93,7 @@ server.on('listening', () => {
 });
 
         
-server.bind(20000);
+server.bind(20001);
         
 
 app.listen(app.get('port'), () => {
