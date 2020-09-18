@@ -9,7 +9,14 @@ var longitud ='x2';
 var stamptime ='x3';
 const fs= require('fs');
 
-app.set('port', 18000);
+console.log("Puerto TCP:");
+var TCP = process.openStdin();
+TCP=parseInt(TCP);
+console.log("Puerto UDP:");
+var UDP = process.openStdin();
+UDP=parseInt(UDP);
+
+app.set('port', TCP);
 
 //ENVIAR ARCHIVOS AL REQUEST
 app.get('/',function(req,res){
@@ -73,7 +80,7 @@ server.on('message', function(msg, rinfo) {
         longitud=  longitud;
         var fecha= msg.toString('utf8').split(";")[2];
         fecha= fecha;
-        var hora= msg.toString('utf8').split(";")[2];
+        var hora= msg.toString('utf8').split(";")[3];
         hora= hora;
 
         
@@ -93,7 +100,7 @@ server.on('listening', () => {
 });
 
         
-server.bind(19000);
+server.bind(UDP);
         
 
 app.listen(app.get('port'), () => {
