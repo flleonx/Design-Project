@@ -4,12 +4,12 @@ var net =require('net');
 
 const app = express();
 const path = require('path');
-var latitud ='soplao';
-var longitud ='chavez';
-var stamptime ='soplao';
+var latitud ='x1';
+var longitud ='x2';
+var stamptime ='x3';
 const fs= require('fs');
 
-app.set('port', 12000);
+app.set('port', 13000);
 
 //ENVIAR ARCHIVOS AL REQUEST
 app.get('/',function(req,res){
@@ -55,21 +55,30 @@ const database = mysql.createConnection({
          console.log('Connected to mydata');
        });
 
+const dgram = require('dgram');
+const server = dgram.createSocket('udp4');
+
+server.on('error', (err) => {
+  console.log(`server error:\n${err.stack}`);
+  server.close();
+});
 
 
-var port = (process.argv[2] || 24000);
+//var port = (process.argv[2] || 24000);
 
-var server = net.createServer(function(socket){
-    console.log('Truck Tracer\n');
+//var server = net.createServer(function(socket){
+//    console.log('Truck Tracer\n');
 
-    socket.on('data', function(data){
+//    socket.on('data', function(data){
 
-        
-        var latitud= data.toString('utf8').split("/")[0];
+server.on('message', function(msg, rinfo) => {
+  console.log(`server got: ${msg} from ${rinfo.address}:${rinfo.port}`);
+
+        var latitud= msg.toString('utf8').split("/")[0];
         latitud=  latitud;
-        var longitud= data.toString('utf8').split("/")[1];
+        var longitud= ,msg.toString('utf8').split("/")[1];
         longitud=  longitud;
-        var stamptime= data.toString('utf8').split("/")[2];
+        var stamptime= msg.toString('utf8').split("/")[2];
         stamptime= stamptime;
 
         
@@ -81,24 +90,33 @@ var server = net.createServer(function(socket){
             })
 
         var gpsinfo = latitud+"/"+longitud+"/"+stamptime;
-        
-        
-        fs.writeFile('coordenadas.txt', gpsinfo, function(error){
-
-            if(error){
-                return console.log(error);
-            }
-            console.log("File created");
-            console.log(gpsinfo);
-        })
-        
-          
-    });
-    
 });
 
+server.on('listening', () => {
+  const address = server.address();
+  console.log(`server listening ${address.address}:${address.port}`);
+});
 
-server.listen(port);
+        
+server.bind(15000);
+        
+        
+ //       fs.writeFile('coordenadas.txt', gpsinfo, function(error){
+
+//            if(error){
+//               return console.log(error);
+//          }
+//          console.log("File created");
+//            console.log(gpsinfo);
+ //       })
+        
+          
+ //   });
+    
+//});
+
+
+//server.listen(port);
 
 app.listen(app.get('port'), () => {
     console.log('Server on port', app.get('port'));
