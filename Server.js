@@ -9,7 +9,7 @@ var longitud ='x2';
 var stamptime ='x3';
 const fs= require('fs');
 
-app.set('port', 13000);
+app.set('port', 18000);
 
 //ENVIAR ARCHIVOS AL REQUEST
 app.get('/',function(req,res){
@@ -64,13 +64,6 @@ server.on('error', (err) => {
 });
 
 
-//var port = (process.argv[2] || 24000);
-
-//var server = net.createServer(function(socket){
-//    console.log('Truck Tracer\n');
-
-//    socket.on('data', function(data){
-
 server.on('message', function(msg, rinfo) {
   console.log(`server got: ${msg} from ${rinfo.address}:${rinfo.port}`);
 
@@ -100,25 +93,8 @@ server.on('listening', () => {
 });
 
         
-server.bind(15000);
+server.bind(19000);
         
-        
- //       fs.writeFile('coordenadas.txt', gpsinfo, function(error){
-
-//            if(error){
-//               return console.log(error);
-//          }
-//          console.log("File created");
-//            console.log(gpsinfo);
- //       })
-        
-          
- //   });
-    
-//});
-
-
-//server.listen(port);
 
 app.listen(app.get('port'), () => {
     console.log('Server on port', app.get('port'));
