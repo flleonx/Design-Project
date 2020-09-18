@@ -9,8 +9,7 @@ var longitud ='x2';
 var stamptime ='x3';
 const fs= require('fs');
 
-
-app.set('port', 40000);
+app.set('port', 10000);
 
 //ENVIAR ARCHIVOS AL REQUEST
 app.get('/',function(req,res){
@@ -68,7 +67,7 @@ server.on('error', (err) => {
 server.on('message', function(msg, rinfo) {
   console.log(`server got: ${msg} from ${rinfo.address}:${rinfo.port}`);
 
-        var latitud= msg.toString('utf8').split(";")[0];
+        var latitud= msg.toString('utf8').split(";")[0]; 
         latitud=  latitud;
         var longitud= msg.toString('utf8').split(";")[1];
         longitud=  longitud;
@@ -94,8 +93,15 @@ server.on('listening', () => {
 });
 
         
-server.bind(41000);
+server.bind(20000);
         
+
+app.listen(app.get('port'), () => {
+    console.log('Server on port', app.get('port'));
+});
+
+
+server.listen(port);
 
 app.listen(app.get('port'), () => {
     console.log('Server on port', app.get('port'));
