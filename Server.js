@@ -10,7 +10,7 @@ var stamptime ='x3';
 const fs= require('fs');
 
 
-app.set('port', 30000);
+app.set('port', 40000);
 
 //ENVIAR ARCHIVOS AL REQUEST
 app.get('/',function(req,res){
@@ -94,7 +94,7 @@ server.on('listening', () => {
 });
 
         
-server.bind(31000);
+server.bind(41000);
         
 
 app.listen(app.get('port'), () => {
