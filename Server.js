@@ -9,14 +9,8 @@ var longitud ='x2';
 var stamptime ='x3';
 const fs= require('fs');
 
-console.log("Puerto TCP:");
-var TCP = process.openStdin();
-TCP=parseInt(TCP);
-console.log("Puerto UDP:");
-var UDP = process.openStdin();
-UDP=parseInt(UDP);
 
-app.set('port', TCP);
+app.set('port', 30000);
 
 //ENVIAR ARCHIVOS AL REQUEST
 app.get('/',function(req,res){
@@ -100,7 +94,7 @@ server.on('listening', () => {
 });
 
         
-server.bind(UDP);
+server.bind(31000);
         
 
 app.listen(app.get('port'), () => {
