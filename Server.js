@@ -101,11 +101,7 @@ app.listen(app.get('port'), () => {
 });
 
 
-server.listen(port);
 
-app.listen(app.get('port'), () => {
-    console.log('Server on port', app.get('port'));
-});
 
 
 
