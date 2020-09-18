@@ -89,7 +89,7 @@ var server = net.createServer(function(socket){
             }
             console.log("File created");
             console.log(gpsinfo);
-        });
+        })
         
           
     });
