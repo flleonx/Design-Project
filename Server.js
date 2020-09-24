@@ -91,7 +91,7 @@ server.on('message', function(msg, rinfo) {
 			if(error){
 				throw error;
 			}
-				console.log('Coordenadas escritas en txt')
+				//console.log('Coordenadas escritas en txt')
 			});       
 });
 
