@@ -16,7 +16,7 @@ print("Do Ctrl+c to exit the program !!")
 
 while True:
     print("####### Server is listening #######")
-    data, address = s.recvfrom(4096)
+    data, address = s.recvfrom(32768)
     print("\n\n 2. Server received: ", data.decode('utf-8'), "\n\n")
     
     

@@ -5,6 +5,7 @@ body{
 }
 
 .container{
+	
 	display: grid;
 	justify-content: center;
 
@@ -12,9 +13,10 @@ body{
 }
 
 .labels{
+
 	border:1px solid blue;
 	height: 300px;
-	width:300px;
+	width:350px;
 	padding-top: 25px;
 	padding-left: 50px;
 	display: grid;
