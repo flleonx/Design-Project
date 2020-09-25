@@ -16,8 +16,13 @@ function readFile(){
 
 				var Coords=[];
 
-				
+				var i=0;
+
        		setInterval(function() {
+       			if (i!=0){
+       				var coordinates = [lati,long];
+       			}
+				
 
            	 	jQuery.get('Coordenadas.txt', function(txt){
            	 	lati= txt.toString('utf8').split(";")[0];
@@ -29,7 +34,7 @@ function readFile(){
            	 	hour= txt.toString('utf8').split(";")[3];
 				$("#hour").text(hour);
 
-
+				var actual = [lati,long];
 
 				mymap.panTo(new L.LatLng(lati, long));
 				//CARTOGRAFIA
@@ -37,11 +42,16 @@ function readFile(){
 
 				marca.setLatLng([lati,long]).update();
 
+				if (i!=0){
 				
-				var coordinates = [lati,long];
-				Coords.push(coordinates);
-				drawLine(Coords);
+				if (coordinates[0]!=actual[0] && coordinates[1]!=actual[1]  ) {
+                Coords.push(actual)
+                drawLine(Coords); 
+                
+                	}
+            	}
 
+				i=i+1;
 
 				})
       		}, 1000);
