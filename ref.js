@@ -7,12 +7,12 @@ function readFile(){
 
 				
 
-				var mymap = L.map('issMap').setView([11.01756,-74.85698], 15);
+				var mymap = L.map('issMap').setView([10.92166,-74.80560], 17);
 				const tiles = L.tileLayer(tileUrl,{attribution}).addTo(mymap);
 
 				var marca ={};
 
-				marca= L.marker([11.01756,-74.85698]).addTo(mymap);
+				marca= L.marker([10.92166,-74.80560]).addTo(mymap);
 
 				var Coords=[];
 
@@ -35,13 +35,15 @@ function readFile(){
 				$("#hour").text(hour);
 
 				var actual = [lati,long];
-
+				//CENTRAR MAPA
 				mymap.panTo(new L.LatLng(lati, long));
 				//CARTOGRAFIA
 				//var mymap = L.map('issMap').setView([lati, long], 15);
 
+				//ACTUALIZAR MARKER
 				marca.setLatLng([lati,long]).update();
 
+				//EVITAR SUPERPOSICIÓN
 				if (i!=0){
 				
 				if (coordinates[0]!=actual[0] && coordinates[1]!=actual[1]  ) {
@@ -57,7 +59,7 @@ function readFile(){
       		}, 1000);
 
       		function drawLine(Coords){
-      			var polyline = L.polyline(Coords, {color: 'green'}).addTo(mymap);
+      			var polyline = L.polyline(Coords, {color: 'red'}).addTo(mymap);
       		}
       	};
 

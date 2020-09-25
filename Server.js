@@ -38,22 +38,22 @@ app.get('/map.js',function(req,res){
 	res.sendFile(__dirname + '/map.js')
 })
 
-const mysql = require('mysql');
+// const mysql = require('mysql');
 
-const database = mysql.createConnection({
-     host: 'mydata.cfhamhnsbqmg.us-east-1.rds.amazonaws.com',
-     user: 'admin',
-     password: 'database01!',
-     database: 'mydata'
-            });
+// const database = mysql.createConnection({
+//      host: 'mydata.cfhamhnsbqmg.us-east-1.rds.amazonaws.com',
+//      user: 'admin',
+//      password: 'database01!',
+//      database: 'mydata'
+//             });
 
-     //Verificar conexión
-    database.connect((err) => {
-      if(err){
-          throw err;
-             }
-         console.log('Connected to mydata');
-       });
+//      //Verificar conexión
+//     database.connect((err) => {
+//       if(err){
+//           throw err;
+//              }
+//          console.log('Connected to mydata');
+//        });
 
 const dgram = require('dgram');
 const server = dgram.createSocket('udp4');
@@ -98,7 +98,7 @@ server.on('message', function(msg, rinfo) {
 //Escribir TXT desde nodejs
 
 
-
+// 
 server.on('listening', () => {
   const address = server.address();
   console.log(`server listening ${address.address}:${address.port}`);
