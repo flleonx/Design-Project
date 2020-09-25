@@ -80,10 +80,10 @@ server.on('message', function(msg, rinfo) {
         
 
         datosget={latitud: latitud,longitud: longitud, fecha: fecha, hora: hora }
-        let sql = 'INSERT INTO getdata SET ?';
-        let query = database.query(sql,datosget,(err,result) =>{
-                  if(err) throw err;
-            })
+        // let sql = 'INSERT INTO getdata SET ?';
+        // let query = database.query(sql,datosget,(err,result) =>{
+        //           if(err) throw err;
+        //     })
 
         gpsinfo = latitud+";"+longitud+";"+fecha+";"+hora;
 
