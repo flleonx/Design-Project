@@ -15,7 +15,7 @@ body{
 .labels{
 
 	border:1px solid blue;
-	height: 300px;
+	height: 250px;
 	width:350px;
 	padding-top: 25px;
 	padding-left: 50px;
@@ -87,11 +87,11 @@ body{
 }
 
 #issMap{
-	margin-top: 20px;
-	margin-left: 450px;
+	margin-top: 1%;
+	margin-left: 30%;
 
 	width: 600px;
-	height: 420px;
+	height: 450px;
 	margin-top: 15px:
 }
 
