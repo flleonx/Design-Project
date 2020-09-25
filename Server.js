@@ -38,22 +38,22 @@ app.get('/map.js',function(req,res){
 	res.sendFile(__dirname + '/map.js')
 })
 
-// const mysql = require('mysql');
+const mysql = require('mysql');
 
-// const database = mysql.createConnection({
-//      host: 'mydata.cfhamhnsbqmg.us-east-1.rds.amazonaws.com',
-//      user: 'admin',
-//      password: 'database01!',
-//      database: 'mydata'
-//             });
+const database = mysql.createConnection({
+     host: 'mydata.cfhamhnsbqmg.us-east-1.rds.amazonaws.com',
+     user: 'admin',
+     password: 'database01!',
+     database: 'mydata'
+            });
 
-//      //Verificar conexión
-//     database.connect((err) => {
-//       if(err){
-//           throw err;
-//              }
-//          console.log('Connected to mydata');
-//        });
+     //Verificar conexión
+    database.connect((err) => {
+      if(err){
+          // throw err;
+             }
+         console.log('Connected to mydata');
+       });
 
 const dgram = require('dgram');
 const server = dgram.createSocket('udp4');
@@ -80,10 +80,10 @@ server.on('message', function(msg, rinfo) {
         
 
         datosget={latitud: latitud,longitud: longitud, fecha: fecha, hora: hora }
-        // let sql = 'INSERT INTO getdata SET ?';
-        // let query = database.query(sql,datosget,(err,result) =>{
-        //           if(err) throw err;
-        //     })
+        let sql = 'INSERT INTO getdata SET ?';
+        let query = database.query(sql,datosget,(err,result) =>{
+                  if(err) throw err;
+            })
 
         gpsinfo = latitud+";"+longitud+";"+fecha+";"+hora;
 
