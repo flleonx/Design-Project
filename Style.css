@@ -2,17 +2,105 @@
 body{
 	margin: 0;
 	padding: 0;
+	font-family: Times New Roman;
+	font-size: 1rem;
+	line-height: 1.6em;
+
 }
 
-.container{
-	
+
+
+.general-container{
+
+		display:flex;
+		border: 2px solid black;
+		margin-top: 2%;
+		margin-left:4%;
+		height: 600px;
+		width: 90%;
+		justify-content: space-between;
+		flex-wrap: wrap;
+}
+/*	display: grid;*/
+
+.sub-container{
+	width: 35%;
+	height: 50%;
+	background: white;
+	margin-top: 15%;
 	display: grid;
-	justify-content: center;
-
+	grid-template-columns: 50% 50%;
+	grid-auto-rows: 10%
 
 }
 
-.labels{
+.table-title{
+	grid-column-start: 1;
+	grid-column-end: 3;
+
+	background: #A4C1FB;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-weight: bold;
+	border: 2px solid black;
+
+}
+
+.table-item{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border: 2px solid black;
+
+}
+
+.table-label{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-weight: bold;
+	border: 2px solid black;
+}
+
+
+
+
+
+
+
+
+
+/*.table-container{
+	margin-left: 1%;
+	margin-top: 70%;
+	width: 100%;
+	border-collapse: collapse;
+}
+
+.table-container td{
+	border: 2px solid black;
+	padding-left: 20px;
+	
+	padding-top: 10px;
+	padding-bottom: 10px;
+
+}
+
+.table-container td {
+	border-bottom: 1px solid black;
+
+}
+
+.table-container td:first-child {
+	font-weight: bold;
+	background-color: #A4C1FB;
+
+}*/
+
+
+
+/*.labels{
 
 	border:1px solid blue;
 	height: 250px;
@@ -84,14 +172,11 @@ body{
 	color:red;
 	font-size: 20px;
 	background: white;
-}
+}*/
 
 #issMap{
-	margin-top: 1%;
-	margin-left: 30%;
 
-	width: 600px;
-	height: 450px;
-	margin-top: 15px:
+	width: 65%;
+	height: 100%;
 }
 
