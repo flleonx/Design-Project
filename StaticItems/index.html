@@ -17,33 +17,67 @@
 
   		<script type="text/javascript" src="ref.js"></script>
 
+  		<link rel="stylesheet" type="text/css" href="jquery.datetimepicker.min.css">
+  		<script type="text/javascript" src="jquery.js"></script>
+  		<script type="text/javascript" src="jquery.datetimepicker.full.js"></script>
+		<script src='/socket.io/socket.io.js'></script>
+		<script>var socket = io.connect('http://34.199.248.67:51000/');</script>
 
 	</head>
-	<body onload="readFile()">
-
+	<body>
 	<div class="general-container">
 		<div class="sub-container">
-			
+		<div class="sub-container1">
 
 			<div class="table-title">Información</div>
 		    <div class="table-label" class="table-item">Latitud</div>
     		<div id="lati" class="table-item"></div>
     
-
-    	
    			<div class="table-label" class="table-item">Longitud</div>
 			<div id="long" class="table-item"></div>
-		
-
 		
     		<div class="table-label" class="table-item">Fecha</div>
 			<div id="date" class="table-item"></div>
 		
-    		<div class="table-label" class="table-item">Hora</div>
-  			<div id="hour" class="table-item"></div>
-		
-  			
+    		<!-- <div class="table-label" class="table-item">Hora</div>
+  			<div id="hour" class="table-item"></div> -->
+
+
 		</div>
+
+		<div class="sub-container2" id="Claseamplia">
+			<input type="button" class="real_time "onclick="readFile()" value="Tiempo Real"></button>
+			<!-- <button type="button" onclick="Database()" value="Iniciar codigo"></button> -->
+			<!-- <script>
+				function Database(){
+				socket.on('interval', function (output) {
+                console.log(output);
+				});
+			};
+			</script> -->
+			<div class="start-title">Inicio:</div>
+			
+			<form action="/intervalo" method="POST" name="intervalo1" id="intervalo1" autocomplete="off">
+			<input id="Start" class="start-container" placeholder="Inicio" name="Start">
+			<script>
+				$("#Start").datetimepicker({
+ 				format:'d/m/Y H:i'
+					});
+			</script>
+
+			<div class="end-title">Fin:</div>
+
+			<input id="Finish" class="end-container" placeholder="Final" name="Finish">
+			<script>
+				$("#Finish").datetimepicker({
+ 				format:'d/m/Y H:i'
+					});
+			</script>
+			<input type="submit" class="boton_intervalo" value="Ingresar Intervalo" onclick="Database()">
+			</form>
+			</div>
+  		</div>
+		
 
 		<!-- form class="labels"> -->
 
@@ -65,11 +99,9 @@
 
 
 		<div id="issMap" class="Map"></div>
-		
+		<div id="issMap2" class="Map2"></div>
 		</div>
-
-			
-
+		
 	
 		<!-- </form>  -->
 

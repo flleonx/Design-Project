@@ -14,25 +14,100 @@ body{
 
 		display:flex;
 		border: 2px solid black;
-		margin-top: 2%;
-		margin-left:4%;
-		height: 600px;
-		width: 90%;
+		margin-top: 0%;
+		margin-left:0%;
+		height: 750px;
+		width: 100%;
 		justify-content: space-between;
 		flex-wrap: wrap;
 }
-/*	display: grid;*/
 
 .sub-container{
-	width: 35%;
+	width: 20%;
+	height: 100%;
+	background: white;
+	display: grid;
+	grid-auto-columns: 100%;
+	grid-template-rows: 50% 50%;
+
+}
+
+.sub-container1{
+/*	width: 25%;
 	height: 50%;
 	background: white;
-	margin-top: 15%;
+	margin-top: 15%;*/
 	display: grid;
-	grid-template-columns: 50% 50%;
+	grid-template-columns: 70px 1fr;
+
 	grid-auto-rows: 10%
 
 }
+
+.sub-container2{
+	display: grid;
+	grid-template-columns: 100% ;
+	grid-auto-rows: 10%;
+
+}
+
+.sub-container2 div{
+	font-size: 20px;
+}
+
+.start-title{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border: 2px solid black;
+	background: #A4C1FB;
+	font-weight: bold;
+
+}
+
+.end-title{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border: 2px solid black;
+	background: #A4C1FB;
+	font-weight: bold;
+}
+
+.sub-container2 input{
+
+}
+
+.start-container{
+	display: flex;
+	width:100%;
+	height:100%;	
+	justify-content: center;
+	align-items: center;
+}
+
+.end-container{
+	display: flex;
+	width:100%;
+	height:100%;	
+	justify-content: center;
+	align-items: center;
+}
+
+.boton_intervalo{
+	background: #4193AC;
+	font-weight: bold;
+	width:100%;
+	height:100%;
+}
+
+.real_time{
+	background: #4193AC;
+	font-weight: bold;
+	width:100%;
+	height:100%;
+}
+
 
 .table-title{
 	grid-column-start: 1;
@@ -43,29 +118,23 @@ body{
 	justify-content: center;
 	align-items: center;
 	font-weight: bold;
-	border: 2px solid black;
+	border: 1px solid black;
 
 }
 
 .table-item{
 	display: flex;
-	justify-content: center;
-	align-items: center;
-	border: 2px solid black;
+/*	justify-content: center;
+	align-items: center;*/
+	border: 1px solid black;
 
 }
 
 .table-label{
 	display: flex;
-	justify-content: center;
-	align-items: center;
 	font-weight: bold;
-	border: 2px solid black;
+	border: 1px solid black;
 }
-
-
-
-
 
 
 
@@ -176,7 +245,14 @@ body{
 
 #issMap{
 
-	width: 65%;
+	width: 80%;
 	height: 100%;
 }
+#issMap2{
+	position: relative;
+	width: 80%;
+	height: 100%;
+}
+
+
 
