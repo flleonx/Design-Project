@@ -11,7 +11,7 @@ var mymap2;
 //MAP FUNCTION (ASYNC DUE SETTIMEOUT ---> FETCH) 
 async function startMap() {
 
-mymap = L.map('issMap').setView([10.92166,-74.80560], 17);
+mymap = L.map('issMap').setView([10.92166,-74.80560], 13);
 
 const attribution=  '&copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors';
 
@@ -67,7 +67,7 @@ function refreshTable(_actualcoords){
 	document.getElementById("long").innerHTML =  _actualcoords.longitud;
 	document.getElementById("date").innerHTML =  _actualcoords.timestamp;
 
-	mymap.setView(livemarker[0].getLatLng(), 16);
+	mymap.setView(livemarker[0].getLatLng()); //Zoom working , zoom ) 
 };
 
 //AVOID DOM CHECK ERRORS (GUIDE)
