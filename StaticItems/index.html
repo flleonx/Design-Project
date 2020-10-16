@@ -20,8 +20,6 @@
   		<link rel="stylesheet" type="text/css" href="jquery.datetimepicker.min.css">
   		<script type="text/javascript" src="jquery.js"></script>
   		<script type="text/javascript" src="jquery.datetimepicker.full.js"></script>
-		<script src='/socket.io/socket.io.js'></script>
-		<script>var socket = io.connect('http://34.199.248.67:51000/');</script>
 
 	</head>
 	<body>
@@ -42,11 +40,11 @@
     		<!-- <div class="table-label" class="table-item">Hora</div>
   			<div id="hour" class="table-item"></div> -->
 
-
+			<input type="button" class="real_time " value=" Pulsar para: Tiempo Real" onclick="_switchtoMap1()">
 		</div>
 
 		<div class="sub-container2" id="Claseamplia">
-			<input type="button" class="real_time "onclick="readFile()" value="Tiempo Real"></button>
+			
 			<!-- <button type="button" onclick="Database()" value="Iniciar codigo"></button> -->
 			<!-- <script>
 				function Database(){
@@ -55,52 +53,35 @@
 				});
 			};
 			</script> -->
+			<div ></div>
+			<div class="Historicos-title">Historicos</div>
 			<div class="start-title">Inicio:</div>
 			
-			<form action="/intervalo" method="POST" name="intervalo1" id="intervalo1" autocomplete="off">
-			<input id="Start" class="start-container" placeholder="Inicio" name="Start">
+			<input id="Start" class="start-container"  name="Start" placeholder="Fecha Inicial">
+			<input type="button" class="inputDate1"  id="inputDate1" value="Ingresar fecha inicial" onclick="_enableDate2()">
 			<script>
-				$("#Start").datetimepicker({
- 				format:'d/m/Y H:i'
-					});
+				_picker1();
 			</script>
 
 			<div class="end-title">Fin:</div>
 
-			<input id="Finish" class="end-container" placeholder="Final" name="Finish">
-			<script>
-				$("#Finish").datetimepicker({
- 				format:'d/m/Y H:i'
-					});
-			</script>
-			<input type="submit" class="boton_intervalo" value="Ingresar Intervalo" onclick="Database()">
-			</form>
+			<input id="Finish" class="end-container"  name="Finish" disabled= "true" placeholder="Fecha Final">
+			<!-- <script>
+				_picker2();
+			</script> -->
+			<input type="button" id="intervalbutton" class="boton_intervalo" value="Ingresar Intervalo" onclick="_switchtoMap2()">
+			<div class="Cases-title">Información de historicos:</div>
+			<div ></div>
+			<div id="Cases" class="Cases-info"></div>
 			</div>
+
   		</div>
-		
-
-		<!-- form class="labels"> -->
-
-		<!-- <div id="latlabel">Latitud: </div> -->
-			<!-- <label>Latitud:</label> -->
-			<!-- <div id="lati"></div> -->
-
-		<!-- <div id="longlabel">Longitud: </div> -->
-			<!-- <label>Longitud:</label> -->
-			<!-- <div id="long"></div> -->
-
-		<!-- <div id="fechalabel">Fecha: </div> -->
-			<!-- <label>Fecha:</label> -->
-			<!-- <div id="date"></div> -->
-
-		<!-- <div id="horalabel">Hora: </div> -->
-			<!-- <label>Hora:</label> -->
-			<!-- <div id="hour"></div> -->
 
 
 		<div id="issMap" class="Map"></div>
 		<div id="issMap2" class="Map2"></div>
-		</div>
+		<script>startMap();</script>		
+	</div>
 		
 	
 		<!-- </form>  -->
