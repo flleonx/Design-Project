@@ -9,13 +9,20 @@ var longitud ='x2';
 var stamptime ='x3';
 const fs= require('fs');
 
-var server = require('http').Server(app);       
-var io = socketio.listen(server);
+// var server = require('http').Server(app);       
+// var io = socketio.listen(server);
 
-var bodyParser =require('body-parser');
-var urlencodedParser = bodyParser.urlencoded({ extended: false });
+app.listen(51000);
+
+
 
 app.use(express.static('StaticItems'));
+
+// Parse URL-encoded bodies (as sent by HTML forms)
+app.use(express.urlencoded());
+
+// Parse JSON bodies (as sent by API clients)
+app.use(express.json());
 
 function read(file, callback) {
     fs.readFile(file, 'utf8', function(err, data) {
@@ -74,7 +81,7 @@ server1.on('error', (err) => {
 var gpsinfo=''
 
 server1.on('message', function(msg, rinfo) {
-  console.log(`server got: ${msg} from ${rinfo.address}:${rinfo.port}`);
+  // console.log(`server got: ${msg} from ${rinfo.address}:${rinfo.port}`);
 
         var latitud= msg.toString('utf8').split(";")[0]; 
         latitud=  latitud;
@@ -82,10 +89,7 @@ server1.on('message', function(msg, rinfo) {
         longitud=  longitud;
         var timestamp= msg.toString('utf8').split(";")[2];
         timestamp= timestamp;
-        console.log(timestamp);
-
         
-
         datosget={latitud: latitud,longitud: longitud, timestamp: timestamp }
         let sql = 'INSERT INTO getdata SET ?';
         let query = database.query(sql,datosget,(err,result) =>{
@@ -94,30 +98,25 @@ server1.on('message', function(msg, rinfo) {
 
         gpsinfo = latitud+";"+longitud+";"+timestamp;
 
-		 fs.appendFile(path.join(__dirname + '/StaticItems/Coordenadas.txt'),gpsinfo, {flag: "w"}, (error) => {
-			if(error){
-				throw error;
-			}
-				//console.log('Coordenadas escritas en txt')
-			});       
+		//  fs.appendFile(path.join(__dirname + '/StaticItems/Coordenadas.txt'),gpsinfo, {flag: "w"}, (error) => {
+		// 	if(error){
+		// 		throw error;
+		// 	}
+		// 		//console.log('Coordenadas escritas en txt')
+		// 	});       
 });
 
-//Escribir TXT desde nodejs
 
 
-// 
+
+
 server1.on('listening', () => {
-  const address = server.address();
-  console.log(`server listening ${address.address}:${address.port}`);
+  const address = server1.address();
+  console.log(`UDP Socket Listening at: ${address.address}:${address.port}`);
 });
 
 
-
-        
-
-        
-
-//Llamar POST
+// Llamar POST
 
 app.get('/', (request, response) => {
   response.writeHead(200, {'content-type': 'text/html'});
@@ -126,22 +125,40 @@ app.get('/', (request, response) => {
 });
 
 
-app.post('/intervalo', urlencodedParser, function (req,res) {
-  var Start = req.body.Start;
-  var Finish = req.body.Finish;
+app.get('/actualcoords', function(req, res) {
+  let sql = 'SELECT * FROM getdata WHERE Entrada = (SELECT MAX(Entrada)  FROM getdata)'
+  let query = database.query(sql, (err, output) => {
+      if (err) throw err;
+      // console.log(output)
+      res.end(JSON.stringify(output[0]));
+  });
+});
+
+
+app.post('/intervalo', function (req,res) {
+  console.log(req.body.start)
+  console.log(req.body.end)
+  
+  var Start = req.body.start;
+  var Finish = req.body.end;
+
   Start = Start.toString()
   Finish = Finish.toString()
+   
+  console.log(Start)
+  console.log(Finish)
+
   let sql = `SELECT latitud, longitud FROM getdata WHERE timestamp BETWEEN '${Start}' and '${Finish}'`;//CAMBIAR TIMESTAMP POR COLUMNA CORRECTA
     let query = database.query(sql, (err, output) => {
         if(err){ throw err;}
-        // console.log(output);
-	io.sockets.emit('interval', output);
+        //  console.log(output);
+      res.end(JSON.stringify(output))
 });
 
 });
 
 
 server1.bind(52000);
-server.listen(51000, () => {
-  console.log("Servidor en puerto 51000");
-});
+// server.listen(51000, () => {
+//   console.log("Servidor en puerto 51000");
+// });
