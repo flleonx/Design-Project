@@ -26,21 +26,32 @@
 	<div class="general-container">
 		<div class="sub-container">
 		<div class="sub-container1">
-
-			<div class="table-title">Información</div>
+			<!-- TRUCK 1 TABLE -->
+			<div class="table-title">Posición actual: Camión 1</div>
 		    <div class="table-label" class="table-item">Latitud</div>
-    		<div id="lati" class="table-item"></div>
+    		<div id="lati1" class="table-item"></div>
     
    			<div class="table-label" class="table-item">Longitud</div>
-			<div id="long" class="table-item"></div>
+			<div id="long1" class="table-item"></div>
 		
     		<div class="table-label" class="table-item">Fecha</div>
-			<div id="date" class="table-item"></div>
+			<div id="date1" class="table-item"></div>
+			<!-- TRUCK 2 TABLE  -->
+
+			<div class="table-title">Posición actual: Camión 2</div>
+		    <div class="table-label" class="table-item">Latitud</div>
+    		<div id="lati2" class="table-item"></div>
+    
+   			<div class="table-label" class="table-item">Longitud</div>
+			<div id="long2" class="table-item"></div>
+		
+    		<div class="table-label" class="table-item">Fecha</div>
+			<div id="date2" class="table-item"></div>
 		
     		<!-- <div class="table-label" class="table-item">Hora</div>
   			<div id="hour" class="table-item"></div> -->
 
-			<input type="button" class="real_time " value=" Pulsar para: Tiempo Real" onclick="_switchtoMap1()">
+			<input type="button" class="real_time" id= "realTime" value="Camiones en tiempo real">
 		</div>
 
 		<div class="sub-container2" id="Claseamplia">
@@ -58,7 +69,7 @@
 			<div class="start-title">Inicio:</div>
 			
 			<input id="Start" class="start-container"  name="Start" placeholder="Fecha Inicial">
-			<input type="button" class="inputDate1"  id="inputDate1" value="Ingresar fecha inicial" onclick="_enableDate2()">
+			<input type="button" class="inputDate1"  id="inputDate1" value="Ingresar fecha inicial" >
 			<script>
 				_picker1();
 			</script>
@@ -69,10 +80,18 @@
 			<!-- <script>
 				_picker2();
 			</script> -->
-			<input type="button" id="intervalbutton" class="boton_intervalo" value="Ingresar Intervalo" onclick="_switchtoMap2()">
-			<div class="Cases-title">Información de historicos:</div>
-			<div ></div>
-			<div id="Cases" class="Cases-info"></div>
+			<input type="button" id="intervalbutton" class="boton_intervalo" value="Realizar búsqueda">
+			
+			<div class="Cases-title">Selección de camión:</div>
+
+			<input type="checkbox" id="_truck1" class="_truck1"><label for="_truck1">Camión 1</label>
+			
+			<input type="checkbox" id="_truck2" class="_truck2"><label for="_truck2">Camión 2</label>
+
+
+			<div id="sliderLabel" class="Historicos-title">Posicionar en el trayecto</div>
+			<input type="range" id="intervalSlider" class="intervalSlider">		
+
 			</div>
 
   		</div>
