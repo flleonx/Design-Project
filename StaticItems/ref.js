@@ -495,8 +495,10 @@ function _emptyInterval(){
 		alert("Busqueda realizada con éxito, seleccione alguno de los 2 camiones para visualizar su trayecto")
 		_switchtoMap2();
 		Geschichte();
+	}else if (usertruckH == 0 && (duplacoordsT1.length ==0 || duplacoordsT1.length == 0)){
+		alert("No existen trayectorias en este intervalo para ningún camión");
+		adjustContainer2();
 	}
-
 }
 
 //TIME PICKERS FILTERED
