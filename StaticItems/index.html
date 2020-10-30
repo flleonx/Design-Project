@@ -25,8 +25,28 @@
 	<body>
 	<div class="general-container">
 		<div class="sub-container">
-		<div class="sub-container1">
+			<div class="modes-container">
+			
+				<div class="RTdiv"><input type="checkbox" id="_realTM" class="_realTM" checked=true><label for="_realTM" class="_realTML"></label>
+					<div class="title-RT">Tiempo real</div>
+				</div>
+				<div class="Hdiv">
+				<input type="checkbox" id="_historicM" class="_historicM"><label for="_historicM" class="_historicML"></label>
+					<div class="title-H">Historicos</div>
+				</div>
+			</div>
+		<div class="sub-container1" id="sub-container1">
+			<div class="_RTTd1">
+				<input type="checkbox" id="_truck1RT" class="_truck1RT" checked="true"><label for="_truck1RT" class="_truck1RTL" ></label>
+					<div class="title-T1RT">Camión 1</div>
+				</div>
+			<div class="_RTTd2">
+				<input type="checkbox" id="_truck2RT" class="_truck2RT"><label for="_truck2RT" class="_truck2RTL"></label>
+				<div class="title-T2RT">Camión 2</div>
+			</div>
+
 			<!-- TRUCK 1 TABLE -->
+			<div id=Table1RT class="Table1RT">
 			<div class="table-title">Posición actual: Camión 1</div>
 		    <div class="table-label" class="table-item">Latitud</div>
     		<div id="lati1" class="table-item"></div>
@@ -36,8 +56,13 @@
 		
     		<div class="table-label" class="table-item">Fecha</div>
 			<div id="date1" class="table-item"></div>
+
+			<div class="table-label" class="table-item" id="Acel1">Acelerómetro</div>
+			<div id="sensor1" class="table-item"></div>
+			</div>
 			<!-- TRUCK 2 TABLE  -->
 
+			<div id=Table2RT class="Table2RT">
 			<div class="table-title">Posición actual: Camión 2</div>
 		    <div class="table-label" class="table-item">Latitud</div>
     		<div id="lati2" class="table-item"></div>
@@ -47,52 +72,87 @@
 		
     		<div class="table-label" class="table-item">Fecha</div>
 			<div id="date2" class="table-item"></div>
-		
-    		<!-- <div class="table-label" class="table-item">Hora</div>
-  			<div id="hour" class="table-item"></div> -->
 
-			<input type="button" class="real_time" id= "realTime" value="Camiones en tiempo real">
+			<div class="table-label" class="table-item" id="Acel1">Acelerómetro</div>
+			<div id="sensor2" class="table-item"></div>
+			</div>
+			<!-- <input type="button" class="real_time" id= "realTime" value="Camiones en tiempo real"> -->
+
 		</div>
 
-		<div class="sub-container2" id="Claseamplia">
+		<div class="sub-container2" id="sub-container2" style="display:none">
 			
-			<!-- <button type="button" onclick="Database()" value="Iniciar codigo"></button> -->
-			<!-- <script>
-				function Database(){
-				socket.on('interval', function (output) {
-                console.log(output);
-				});
-			};
-			</script> -->
 			<div ></div>
-			<div class="Historicos-title">Historicos</div>
+			<!-- <div class="Historicos-title">Historicos</div> -->
 			<div class="start-title">Inicio:</div>
 			
-			<input id="Start" class="start-container"  name="Start" placeholder="Fecha Inicial">
-			<input type="button" class="inputDate1"  id="inputDate1" value="Ingresar fecha inicial" >
+			<input type="text" id="Start" class="start-container"  name="Start" placeholder="Fecha Inicial">
+			<!-- <input type="button" class="inputDate1"  id="inputDate1" value="Ingresar fecha inicial" > -->
 			<script>
 				_picker1();
 			</script>
 
 			<div class="end-title">Fin:</div>
 
-			<input id="Finish" class="end-container"  name="Finish" disabled= "true" placeholder="Fecha Final">
+			<input id="Finish" class="end-container"  name="Finish"  placeholder="Fecha Final">
 			<!-- <script>
 				_picker2();
 			</script> -->
 			<input type="button" id="intervalbutton" class="boton_intervalo" value="Realizar búsqueda">
 			
-			<div class="Cases-title">Selección de camión:</div>
+			<div class="truck-title">Selección de camión:</div>
 
-			<input type="checkbox" id="_truck1" class="_truck1"><label for="_truck1">Camión 1</label>
-			
-			<input type="checkbox" id="_truck2" class="_truck2"><label for="_truck2">Camión 2</label>
-
-
-			<div id="sliderLabel" class="Historicos-title">Posicionar en el trayecto</div>
-			<input type="range" id="intervalSlider" class="intervalSlider">		
-
+			<div class="_THd1">
+			<input type="checkbox" id="_truck1H" class="_truck1H" checked="true"><label for="_truck1H" class="_truck1HL"></label>
+				<div class="title-T1H">Camión 1</div>
 			</div>
+
+			<div class="_THd2">
+			<input type="checkbox" id="_truck2H" class="_truck2H"><label for="_truck2H" class="_truck2HL"></label>
+				<div class="title-T2H">Camión 2</div>
+			</div>
+
+			<div id="sliderLabel" class="sliderLabel">Posicionar Camion 1</div>
+			<div id="sliderContainer1" class="sliderContainer1">
+			<input type="range" id="intervalSlider" class="intervalSlider">	
+			</div>	
+
+			<div id="sliderLabel2" class="sliderLabel2">Posicionar Camion 2</div>
+			<div id="sliderContainer2" class="sliderContainer2">
+			<input type="range" id="intervalSlider2" class="intervalSlider2">	
+			</div>
+
+			<div id="_truck1Table" class="_truck1Table">
+				<div class="table-title">Información: Camión 1</div>
+				<div class="table-label" class="table-item">Latitud</div>
+				<div id="lati1H" class="table-item"></div>
+		
+				<div class="table-label" class="table-item">Longitud</div>
+				<div id="long1H" class="table-item"></div>
+			
+				<div class="table-label" class="table-item">Fecha</div>
+				<div id="date1H" class="table-item"></div>
+
+				<div class="table-label" class="table-item" id="Acel1">Acelerómetro</div>
+				<div id="sensor1H" class="table-item"></div>
+			</div>
+
+			<div id="_truck2Table" class="_truck2Table">
+				<div class="table-title">Información: Camión 2</div>
+				<div class="table-label" class="table-item">Latitud</div>
+				<div id="lati2H" class="table-item"></div>
+		
+				<div class="table-label" class="table-item">Longitud</div>
+				<div id="long2H" class="table-item"></div>
+
+				<div class="table-label" class="table-item">Fecha</div>
+				<div id="date2H" class="table-item"></div>
+			
+				<div class="table-label" class="table-item" id="Acel1">Acelerómetro</div>
+				<div id="sensor2H" class="table-item"></div>
+			</div>
+
+		</div>
 
   		</div>
 
