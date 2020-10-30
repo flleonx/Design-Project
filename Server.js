@@ -31,9 +31,6 @@ function read(file, callback) {
     });
 }
 
-// var hostvaluef="";
-// console.log(hostvaluef)
-
 var outputread = fs.readFileSync('Credenciales.txt','utf8');
 var credenciales=outputread;
 hostvalue= credenciales.split(";")[0];
@@ -60,6 +57,7 @@ const database = mysql.createConnection({
 
 const dgram = require('dgram'); //DGRAM LIBRARY
 const { format } = require('path');
+const { finished } = require('stream');
 
 //TRUCKS SOCKETS
 const _truckS1 = dgram.createSocket('udp4');
@@ -87,10 +85,11 @@ _truckS1.on('message', function(msg, rinfo) {
   longitud=  longitud;
   var timestamp= msg.toString('utf8').split(";")[2];
   timestamp= timestamp;
+  var sensor =msg.toString('utf-8').split(";")[3];
 
   timestampK = _timestampK(timestamp)
 
-  datosget={latitud: latitud,longitud: longitud, timestamp: timestampK}
+  datosget={latitud: latitud,longitud: longitud, timestamp: timestampK, sensor: sensor}
   let sql = 'INSERT INTO truck1 SET ?';
   let query = database.query(sql,datosget,(err,result) =>{
             if(err) throw err;
@@ -105,10 +104,10 @@ _truckS2.on('message', function(msg, rinfo) {
   longitud=  longitud;
   var timestamp= msg.toString('utf8').split(";")[2];
   timestamp= timestamp;
-
+  var sensor =msg.toString('utf-8').split(";")[3];
   timestampK = _timestampK(timestamp)
 
-  datosget={latitud: latitud,longitud: longitud, timestamp: timestampK}
+  datosget={latitud: latitud,longitud: longitud, timestamp: timestampK, sensor: sensor}
   let sql = 'INSERT INTO truck2 SET ?';
   let query = database.query(sql,datosget,(err,result) =>{
             if(err) throw err;
@@ -135,54 +134,42 @@ app.get('/', (request, response) => {
   file.pipe(response);
 });
 
-var _tableT1;
-var _tableT2;
-
+//GET
 app.get('/actualcoords', function(req, res) {
 
-  let sqlT1 = 'SELECT * FROM truck1 WHERE Entrada = (SELECT MAX(Entrada)  FROM truck1)'
-  let queryT1 = database.query(sqlT1, (err1, output1) => {
-      if (err1) throw err1;
-      //UNDEFINED CORRECTION ---> NO NULL ARGUMENTS WITHIN THE JSON FUNCTION
-      if (output1[0] != null){
-        _tableT1 = (JSON.stringify(output1[0]));
-        _tableT1 = JSON.parse(_tableT1);
-      }
-  });
-
-  let sqlT2 = 'SELECT * FROM truck2 WHERE Entrada = (SELECT MAX(Entrada)  FROM truck2)'
-  let queryT2 = database.query(sqlT2, (err2, output2) => {
-      if (err2) throw err2;
-      if (output2[0] != null){
-      _tableT2 = (JSON.stringify(output2[0]));
-      _tableT2 = JSON.parse(_tableT2);
-      }
-  });
-    // console.log([_tableT2,_tableT1])
-
-    res.end(JSON.stringify([_tableT1,_tableT2]));
+    let sqlT1 = 'SELECT * FROM truck1 WHERE Entrada = (SELECT MAX(Entrada)  FROM truck1)';
+    let sqlT2 = 'SELECT * FROM truck2 WHERE Entrada = (SELECT MAX(Entrada)  FROM truck2)';
+     
+    let queryT1 = database.query(sqlT1, (err1, output1) => {
+          if(err1){ throw err1;}
+      let queryT2 = database.query(sqlT2, (err2, output2) => {
+            if(err2){ throw err2;}
+        res.end(JSON.stringify([output1[0],output2[0]]));
+      });   
+    });
 });
 
+//POST
+app.post('/intervalo', function (req,res) {
 
-app.post('/intervalo/:usertruck', function (req,res) {
-
-  console.log("REQUEST CAMIÓN: "+ req.params.usertruck) 
-  
-  var Start = req.body.start;
-  var Finish = req.body.end;
+  let Start = req.body.start;
+  let Finish = req.body.end;
 
   Start = _timestampKU(Start);
   Finish = _timestampKU(Finish);
 
-  //PARAM
-  let sql = `SELECT latitud, longitud, timestamp FROM truck${req.params.usertruck} WHERE timestamp BETWEEN '${Start}' and '${Finish}'`;
-    let query = database.query(sql, (err, output) => {
-        if(err){ throw err;}
-        // console.log(output);
-      res.end(JSON.stringify(output))
+  let sqlT1 = `SELECT latitud, longitud, timestamp, sensor FROM truck1 WHERE timestamp BETWEEN '${Start}' and '${Finish}'`;
+  let sqlT2 = `SELECT latitud, longitud, timestamp, sensor FROM truck2 WHERE timestamp BETWEEN '${Start}' and '${Finish}'`;
+   
+  let queryT1 = database.query(sqlT1, (err1, output1) => {
+        if(err1){ throw err1;}
+    let queryT2 = database.query(sqlT2, (err2, output2) => {
+          if(err2){ throw err2;}
+      res.end(JSON.stringify([output1,output2]));
+    });   
+  });
 });
 
-});
 
 //TRUCKS SOCKETS STAMENT
 _truckS1.bind(52000);
