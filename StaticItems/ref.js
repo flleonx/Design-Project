@@ -380,7 +380,7 @@ function _slider(){
 		document.getElementById("long1H").innerHTML =  fetchDupla[0][slider.value].long;
 		document.getElementById("date1H").innerHTML =  timeS[0][slider.value];
 		let S1D = Sensors[0][slider.value];
-		document.getElementById("sensor1H").innerHTML =  S1D;
+		document.getElementById("sensor1H").innerHTML =  S1D+"cm";
 		hmarker[4].update();				
 	}
 
