@@ -142,8 +142,8 @@ function refreshTable(_actualcoords){
 	document.getElementById("lati1").innerHTML =  _actualcoords[0].latitud;
 	document.getElementById("long1").innerHTML =  _actualcoords[0].longitud;
 	document.getElementById("date1").innerHTML =  _actualcoords[0].timestamp;
-	let S1 = _actualcoords[0].sensor.split("/");
-	document.getElementById("sensor1").innerHTML =  S1[0]+"X/"+S1[1]+"Y/"+S1[2]+"Z";
+	let S1 = _actualcoords[0].sensor;
+	document.getElementById("sensor1").innerHTML =  S1+"cm";
 
 	document.getElementById("lati2").innerHTML =  _actualcoords[1].latitud;
 	document.getElementById("long2").innerHTML =  _actualcoords[1].longitud;
@@ -379,8 +379,8 @@ function _slider(){
 		document.getElementById("lati1H").innerHTML =  fetchDupla[0][slider.value].lat;
 		document.getElementById("long1H").innerHTML =  fetchDupla[0][slider.value].long;
 		document.getElementById("date1H").innerHTML =  timeS[0][slider.value];
-		let S1D = Sensors[0][slider.value].split("/");
-		document.getElementById("sensor1H").innerHTML =  S1D[0]+"X/"+S1D[1]+"Y/"+S1D[2]+"Z";
+		let S1D = Sensors[0][slider.value];
+		document.getElementById("sensor1H").innerHTML =  S1D;
 		hmarker[4].update();				
 	}
 
@@ -690,7 +690,7 @@ let adjustContainer2 = () =>{
 	}
 	function Case_Empty(){
 		if (((coordsfetchT1.length ==0 && coordsfetchT2.length ==0) || (coordsfetchT1.length ==undefined && coordsfetchT2.length ==undefined))){
-			Container2.style.height = 255+"px";
+			Container2.style.height = 223+"px";
 			clearALL();
 		}else{
 			Other();

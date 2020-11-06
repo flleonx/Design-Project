@@ -62,9 +62,10 @@ body{
 	display: grid;
 	width: 100%;
 	grid-template-columns: 190px;
-	grid-template-rows: 25px 25px 123px 123px;
+	grid-template-rows: 25px 30px 123px 123px;
 	height: 175px;
 	background: #1B1D23;
+	border-bottom-right-radius: 15px;
 
 }
 
@@ -75,6 +76,7 @@ body{
 	grid-auto-rows: 1px 30px 20px 30px 20px 40px 30px 23px 23px 25px 20px 25px 20px 123px 123px;
 	background: #1B1D23;
 	height: 223px;
+	border-bottom-right-radius: 15px;	
 }
 
 
@@ -137,7 +139,7 @@ body{
 	justify-content: center;
 	align-items: center;
 	font-weight: bold;
-	border: 1px solid black;
+	/* border: 1px solid black; */
 	font-size: 14px;
 }
 
@@ -147,7 +149,7 @@ body{
 	display: flex;
 /*	justify-content: center;
 	align-items: center;*/
-	border: 1px solid black;
+	/* border: 1px solid black; */
 	font-size: 13px;
 }
 
