@@ -529,11 +529,11 @@ function _emptyInterval(){
 			_switchtoMap2();
 			Geschichte();
 		}
-	}else if(usertruckH == 0 && (duplacoordsT1.length !=0 || duplacoordsT1.length != 0) && (timestampsT1 != 0 && timestampsT2 != 0)){
+	}else if(usertruckH == 0 && (duplacoordsT1.length !=1 || duplacoordsT1.length != 1) && (timestampsT1 != 0 && timestampsT2 != 0)){
 		alert("Busqueda realizada con éxito, seleccione alguno de los 2 camiones para visualizar su trayecto")
 		_switchtoMap2();
 		Geschichte();
-	}else if (usertruckH == 0 && (duplacoordsT1.length ==0 || duplacoordsT1.length == 0)){
+	}else if (usertruckH == 0 && (duplacoordsT1.length ==1 || duplacoordsT1.length == 1)){
 		alert("No existen trayectorias en este intervalo para ningún camión");
 		_truck1check.checked = false;
 		_truck2check.checked = false;
