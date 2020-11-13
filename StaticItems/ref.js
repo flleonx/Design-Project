@@ -492,7 +492,7 @@ function _emptyInterval(){
 		}
 	}else if(usertruckH == 1){
 		if(timestampsT1 == 0){
-			if(duplacoordsT2.length != 0){
+			if(duplacoordsT2.length != 1){
 				usertruckH = 0 ;
 				_truck1check.checked = false;
 				alert("No existen trayectorias en este intervalo para el camión 1, pero sí para camión 2");
@@ -505,14 +505,14 @@ function _emptyInterval(){
 				usertruckH = 0;
 				adjustContainer2();
 			}
-		}else if (duplacoordsT1.length != 0 ){
+		}else if (duplacoordsT1.length != 1){
 			_switchtoMap2();
 			Geschichte();
 		}
 
 	} else if(usertruckH == 2){
 		if(timestampsT2 == 0){
-			if(duplacoordsT1.length != 0){
+			if(duplacoordsT1.length != 1){
 				usertruckH = 0 ;
 				_truck2check.checked = false;
 				alert("No existen trayectorias en este intervalo para el camión 2, pero sí para camión 1");
@@ -525,7 +525,7 @@ function _emptyInterval(){
 				usertruckH = 0;
 				adjustContainer2();
 			}
-		}else if (duplacoordsT2.length != 0){
+		}else if (duplacoordsT2.length != 1){
 			_switchtoMap2();
 			Geschichte();
 		}
