@@ -144,6 +144,10 @@ app.get('/actualcoords', function(req, res) {
           if(err1){ throw err1;}
       let queryT2 = database.query(sqlT2, (err2, output2) => {
             if(err2){ throw err2;}
+        //CORRECTIONS
+        //console.log(output1[0])
+        if (output1[0] == undefined){output1 = [{latitud: '0',longitud: '0',timestamp: '0',sensor: '0'}]}
+        if (output2[0]== undefined){output2 = [{latitud: '0',longitud: '0',timestamp: '0',sensor: '0'}]}
         res.end(JSON.stringify([output1[0],output2[0]]));
       });   
     });
@@ -165,6 +169,11 @@ app.post('/intervalo', function (req,res) {
         if(err1){ throw err1;}
     let queryT2 = database.query(sqlT2, (err2, output2) => {
           if(err2){ throw err2;}
+          //console.log(output2)
+        //CORRECTIONS
+          if (output1[0] == undefined){output1 = [{latitud: '0',longitud: '0',timestamp: '0',sensor: '0'}]}
+          if (output2[0] == undefined){output2 = [{latitud: '0',longitud: '0',timestamp: '0',sensor: '0'}]}
+
       res.end(JSON.stringify([output1,output2]));
     });   
   });

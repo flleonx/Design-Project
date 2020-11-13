@@ -394,6 +394,14 @@ function _slider(){
 		hmarker[5].update();				
 	}
 
+//	if (timestampsT2 == 0){
+//		if(document.getElementById("_truck1H").checked){
+//			document.getElementById("_truck2Table").style.display = "none";	
+//			usertruckH ==1
+//			document.getElementById("_truck2H").checked = false;
+//		}
+//	}
+
 	if (usertruckH == 1){
 		hmarker[2].remove(layerGroup2);
 		hmarker[3].remove(layerGroup2);
@@ -465,38 +473,49 @@ function _emptyInterval(){
 
 	x1=0;
 	x2=0;
-
+	const _truck1check = document.getElementById("_truck1H");
+	const _truck2check = document.getElementById("_truck2H");
 	if(usertruckH == 3){
-		if (duplacoordsT1.length !=0 || duplacoordsT1.length != 0){
-		_switchtoMap2();
-		Geschichte();
-		}else{
+		if (timestampsT1 == 0 && timestampsT2 == 0){
 			alert("No existen trayectorias en este intervalo para ningún camión");
 			adjustContainer2();
+			_truck1check.checked = false;
+			_truck2check.checked = false;
+			usertruckH = 0;
+		}else if (duplacoordsT1.length !=0 || duplacoordsT1.length != 0){
+		_switchtoMap2();
+		Geschichte();
 		}
 	}else if(usertruckH == 1){
-		if (duplacoordsT1.length != 0){
+		if(timestampsT1 == 0){
+			alert("No existen trayectorias en este intervalo para el camión 1");
+			_truck1check.checked = false;
+			usertruckH = 0;
+			adjustContainer2();
+		}else if (duplacoordsT1.length != 0 ){
 			_switchtoMap2();
 			Geschichte();
-		}else{
-			alert("No existen trayectorias en este intervalo para el camión 1");
-			adjustContainer2();
 		}
 
 	} else if(usertruckH == 2){
-		if (duplacoordsT2.length != 0){
+		if(timestampsT2 == 0){
+			alert("No existen trayectorias en este intervalo para el camión 2");
+			_truck2check.checked = false;
+			usertruckH = 0;
+			adjustContainer2();
+		}else if (duplacoordsT2.length != 0){
 			_switchtoMap2();
 			Geschichte();
-		}else{
-			alert("No existen trayectorias en este intervalo para el camión 2");
-			adjustContainer2();
 		}
-	}else if(usertruckH == 0 && (duplacoordsT1.length !=0 || duplacoordsT1.length != 0)){
+	}else if(usertruckH == 0 && (duplacoordsT1.length !=0 || duplacoordsT1.length != 0) && (timestampsT1 != 0 && timestampsT2 != 0)){
 		alert("Busqueda realizada con éxito, seleccione alguno de los 2 camiones para visualizar su trayecto")
 		_switchtoMap2();
 		Geschichte();
 	}else if (usertruckH == 0 && (duplacoordsT1.length ==0 || duplacoordsT1.length == 0)){
 		alert("No existen trayectorias en este intervalo para ningún camión");
+		_truck1check.checked = false;
+		_truck2check.checked = false;
+		usertruckH = 0;
 		adjustContainer2();
 	}
 }
@@ -689,7 +708,8 @@ let adjustContainer2 = () =>{
 		}
 	}
 	function Case_Empty(){
-		if (((coordsfetchT1.length ==0 && coordsfetchT2.length ==0) || (coordsfetchT1.length ==undefined && coordsfetchT2.length ==undefined))){
+		if (((coordsfetchT1.length ==0 && coordsfetchT2.length ==0) || (coordsfetchT1.length ==undefined && coordsfetchT2.length ==undefined)
+		     || (timestampsT1 == 0 && timestampsT2 == 0 ))){
 			Container2.style.height = 223+"px";
 			clearALL();
 		}else{
@@ -703,20 +723,33 @@ let _polylineT1H = () =>{
 	const _truck2check = document.getElementById("_truck2H");
 	let Container2 = document.getElementById("sub-container2");
 
+	
 	if (_truck1check.checked && _truck2check.checked) {
 		usertruckH = 3;
 
-	}else if (_truck1check.checked){
-		usertruckH =1;
+		}else if (_truck1check.checked){
+			usertruckH =1;
 
-	}else if  (_truck2check.checked){
-		usertruckH =2;
+		}else if  (_truck2check.checked){
+			usertruckH =2;
 
-	}else if (!_truck1check.checked && !_truck2check.checked){
-		usertruckH =0;
-	}
+		}else if (!_truck1check.checked && !_truck2check.checked){
+			usertruckH =0;
+		}
+		console.log(timestampsT1.length && _truck1check.checked)
+		if(timestampsT1.length == 1){
+			if(_truck2check.checked){
+				//usertruckH =2
+				alert("No existen trayectorías en este intervalo para el camión 1")
+				_truck1check.checked = false;
+			}else if(!_truck2check.checked){
+				usertruckH =0
+				alert("No existen trayectorías en este intervalo para el camión 1")
+				_truck1check.checked = false;
+				clearALL();
+			}
+		}
 	adjustContainer2();
-
 }
 
 let _polylineT2H = () =>{
@@ -724,18 +757,30 @@ let _polylineT2H = () =>{
 	const _truck2check = document.getElementById("_truck2H");
 
 	let Container2 = document.getElementById("sub-container2")
-	if (_truck1check.checked && _truck2check.checked) {
-		usertruckH = 3;
-
-	}else if (_truck1check.checked){
-		usertruckH =1;
-
-	}else if  (_truck2check.checked){
-		usertruckH =2;
-
-	}else if (!_truck1check.checked && !_truck2check.checked){
-		usertruckH =0;
-
+	
+		if (_truck1check.checked && _truck2check.checked) {
+			usertruckH = 3;
+	
+		}else if (_truck1check.checked){
+			usertruckH =1;
+	
+		}else if  (_truck2check.checked){
+			usertruckH =2;
+	
+		}else if (!_truck1check.checked && !_truck2check.checked){
+			usertruckH =0;	
+		}
+	if(timestampsT2.length ==1 && _truck2check.checked){
+		if(_truck1check.checked){
+			//usertruckH =2
+			alert("No existen trayectorías en este intervalo para el camión 2")
+			_truck2check.checked = false;
+		}else if(!_truck1check.checked){
+			usertruckH =0
+			alert("No existen trayectorías en este intervalo para el camión 2")
+			_truck2check.checked = false;
+			clearALL();
+		}
 	}
 	adjustContainer2();
 }
