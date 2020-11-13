@@ -22,6 +22,8 @@ var usertruckH = 1; //DEFAULT TRUCK ----> USER SELECT WHICH ONE WANTS TO TRACK H
 async function startMap() {
 
 //HIDE SLIDER
+Geschichte();
+document.getElementById("issMap2").style.display = "none";	
 document.getElementById("intervalSlider").style.display = "none";	
 document.getElementById("intervalSlider2").style.display = "none";
 document.getElementById("sliderLabel").style.display = "none";	
@@ -365,12 +367,12 @@ function _slider(){
 	document.getElementById("intervalSlider2").style.background = "linear-gradient(90deg, rgb(46, 77, 189)"+ (x2/max2)*100 +"%, rgb(214,214,214)"+ (x2/max2)*100+"%)"
 
 	slider.value = `${x1}`; //START VALUE
-	console.log("CAMION: "+usertruck)			
+	//console.log("CAMION: "+usertruck)			
 	slider.min = `${0}`; //MIN VALUE
 	slider.max = `${Dupla[0].length-1}`;  //MAX VALUE
 
 	slider2.value = `${x2}`; //START VALUE
-	console.log("CAMION: "+usertruck)			
+	//console.log("CAMION: "+usertruck)			
 	slider2.min = `${0}`; //MIN VALUE
 	slider2.max = `${Dupla[1].length-1}`;  //MAX VALUE
 
@@ -402,7 +404,7 @@ function _slider(){
 //		}
 //	}
 
-	if (usertruckH == 1){
+	if (usertruckH == 1 && timestampsT1.length != 1){
 		hmarker[2].remove(layerGroup2);
 		hmarker[3].remove(layerGroup2);
 		hmarker[5].remove(layerGroup2);
@@ -413,7 +415,7 @@ function _slider(){
 		var polylineT2 =  L.polyline(duplacoordsT2, {color: 'green'}).addTo(layerGroup2);	
 		polylineT2.remove(layerGroup2);
 		mymap2.setView(hmarker[1].getLatLng()); 
-	} else if (usertruckH ==2){
+	} else if (usertruckH ==2 && timestampsT2.length != 1){
 		hmarker[0].remove(layerGroup2);
 		hmarker[1].remove(layerGroup2);
 		hmarker[4].remove(layerGroup2);			
@@ -424,11 +426,13 @@ function _slider(){
 		document.getElementById("_truck1Table").style.display = "none";	
 		polylineT1.remove(layerGroup2);	
 		mymap2.setView(hmarker[3].getLatLng()); 
-	}  else if (usertruckH == 3){
+	}  else if (usertruckH == 3 && (timestampsT1.length != 1 && timestampsT2.length != 1)){
 		var polylineT1 =  L.polyline(duplacoordsT1, {color: 'blue'}).addTo(layerGroup2);
 		var polylineT2 =  L.polyline(duplacoordsT2, {color: 'green'}).addTo(layerGroup2);
 		mymap2.setView(hmarker[1].getLatLng()); 	
 	} else if(usertruckH == 0){
+		clearALL();
+	}else{
 		clearALL();
 	}
 }
@@ -488,10 +492,19 @@ function _emptyInterval(){
 		}
 	}else if(usertruckH == 1){
 		if(timestampsT1 == 0){
-			alert("No existen trayectorias en este intervalo para el camión 1");
-			_truck1check.checked = false;
-			usertruckH = 0;
-			adjustContainer2();
+			if(duplacoordsT2.length != 0){
+				usertruckH = 0 ;
+				_truck1check.checked = false;
+				alert("No existen trayectorias en este intervalo para el camión 1, pero sí para camión 2");
+				_switchtoMap2();
+				adjustContainer2();
+				Geschichte();
+			}else{
+				alert("No existen trayectorias en este intervalo para el camión 1");
+				_truck1check.checked = false;
+				usertruckH = 0;
+				adjustContainer2();
+			}
 		}else if (duplacoordsT1.length != 0 ){
 			_switchtoMap2();
 			Geschichte();
@@ -499,10 +512,19 @@ function _emptyInterval(){
 
 	} else if(usertruckH == 2){
 		if(timestampsT2 == 0){
-			alert("No existen trayectorias en este intervalo para el camión 2");
-			_truck2check.checked = false;
-			usertruckH = 0;
-			adjustContainer2();
+			if(duplacoordsT1.length != 0){
+				usertruckH = 0 ;
+				_truck2check.checked = false;
+				alert("No existen trayectorias en este intervalo para el camión 2, pero sí para camión 1");
+				_switchtoMap2();
+				adjustContainer2();
+				Geschichte();
+			}else{
+				alert("No existen trayectorias en este intervalo para el camión 2");
+				_truck2check.checked = false;
+				usertruckH = 0;
+				adjustContainer2();
+			}
 		}else if (duplacoordsT2.length != 0){
 			_switchtoMap2();
 			Geschichte();
@@ -737,9 +759,9 @@ let _polylineT1H = () =>{
 			usertruckH =0;
 		}
 		console.log(timestampsT1.length && _truck1check.checked)
-		if(timestampsT1.length == 1){
+		if(timestampsT1.length == 1 && _truck1check.checked){
 			if(_truck2check.checked){
-				//usertruckH =2
+				usertruckH =2
 				alert("No existen trayectorías en este intervalo para el camión 1")
 				_truck1check.checked = false;
 			}else if(!_truck2check.checked){
@@ -749,6 +771,7 @@ let _polylineT1H = () =>{
 				clearALL();
 			}
 		}
+		console.log(usertruckH)
 	adjustContainer2();
 }
 
@@ -772,7 +795,7 @@ let _polylineT2H = () =>{
 		}
 	if(timestampsT2.length ==1 && _truck2check.checked){
 		if(_truck1check.checked){
-			//usertruckH =2
+			usertruckH =1
 			alert("No existen trayectorías en este intervalo para el camión 2")
 			_truck2check.checked = false;
 		}else if(!_truck1check.checked){
@@ -782,6 +805,7 @@ let _polylineT2H = () =>{
 			clearALL();
 		}
 	}
+	console.log(usertruckH)
 	adjustContainer2();
 }
 //SLIDER PERSONALIZATION
