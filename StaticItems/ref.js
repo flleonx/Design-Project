@@ -486,9 +486,21 @@ function _emptyInterval(){
 			_truck1check.checked = false;
 			_truck2check.checked = false;
 			usertruckH = 0;
-		}else if (duplacoordsT1.length !=0 || duplacoordsT1.length != 0){
-		_switchtoMap2();
-		Geschichte();
+		}else if(timestampsT1 == 0 && timestampsT2 != 0){
+			alert("Solo existen trayectorias en este intervalo para camión 2");
+			_truck1check.checked = false;
+			usertruckH = 2;
+			_switchtoMap2();
+			Geschichte();
+		}else if(timestampsT1 != 0 && timestampsT2 == 0){
+			alert("Solo existen trayectorias en este intervalo para camión 1");
+			_truck2check.checked = false;
+			usertruckH = 1;
+			_switchtoMap2();
+			Geschichte();
+		}	else if (duplacoordsT1.length !=0 || duplacoordsT1.length != 0){
+			_switchtoMap2();
+			Geschichte();
 		}
 	}else if(usertruckH == 1){
 		if(timestampsT1 == 0){
