@@ -474,7 +474,7 @@ function _Removevalues(){
 
 //SPECIAL CASES VALIDATION
 function _emptyInterval(){
-
+	console.log(usertruckH)
 	x1=0;
 	x2=0;
 	const _truck1check = document.getElementById("_truck1H");
@@ -504,7 +504,7 @@ function _emptyInterval(){
 		}
 	}else if(usertruckH == 1){
 		if(timestampsT1 == 0){
-			if(duplacoordsT2.length != 1){
+			if(timestampsT2 != 0){
 				usertruckH = 0 ;
 				_truck1check.checked = false;
 				alert("No existen trayectorias en este intervalo para el camión 1, pero sí para camión 2");
@@ -517,14 +517,14 @@ function _emptyInterval(){
 				usertruckH = 0;
 				adjustContainer2();
 			}
-		}else if (duplacoordsT1.length != 1){
+		}else if (timestampsT1 != 0){
 			_switchtoMap2();
 			Geschichte();
 		}
 
-	} else if(usertruckH == 2){
+	}else if(usertruckH == 2){
 		if(timestampsT2 == 0){
-			if(duplacoordsT1.length != 1){
+			if(timestampsT1 != 0){
 				usertruckH = 0 ;
 				_truck2check.checked = false;
 				alert("No existen trayectorias en este intervalo para el camión 2, pero sí para camión 1");
@@ -537,20 +537,30 @@ function _emptyInterval(){
 				usertruckH = 0;
 				adjustContainer2();
 			}
-		}else if (duplacoordsT2.length != 1){
+		}else if (timestampsT2 != 0){
 			_switchtoMap2();
 			Geschichte();
 		}
-	}else if(usertruckH == 0 && (duplacoordsT1.length !=1 || duplacoordsT1.length != 1) && (timestampsT1 != 0 && timestampsT2 != 0)){
-		alert("Busqueda realizada con éxito, seleccione alguno de los 2 camiones para visualizar su trayecto")
-		_switchtoMap2();
-		Geschichte();
-	}else if (usertruckH == 0 && (duplacoordsT1.length ==1 || duplacoordsT1.length == 1)){
-		alert("No existen trayectorias en este intervalo para ningún camión");
-		_truck1check.checked = false;
-		_truck2check.checked = false;
-		usertruckH = 0;
-		adjustContainer2();
+	}else if(usertruckH == 0){
+		if (timestampsT1 != 0 && timestampsT2 != 0){
+			alert("Busqueda realizada con éxito, seleccione alguno de los 2 camiones para visualizar su trayecto")
+			_switchtoMap2();
+			Geschichte();
+		}else if(timestampsT1 != 0 && timestampsT2 == 0){
+			alert("Solo existen trayectorías para camión 1 en este intervalo, seleccionelo para visualizarlas")
+			_switchtoMap2();
+			Geschichte();
+		}else if(timestampsT1 == 0 && timestampsT2 != 0){
+			alert("Solo existen trayectorías para camión 2 en este intervalo, seleccionelo para visualizarlas")
+			_switchtoMap2();
+			Geschichte();
+		}else if(timestampsT1 == 0 && timestampsT2 == 0){
+			alert("No existen trayectorias en este intervalo para ningún camión");
+			_truck1check.checked = false;
+			_truck2check.checked = false;
+			usertruckH = 0;
+			adjustContainer2();
+		}
 	}
 }
 
