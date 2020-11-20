@@ -22,24 +22,36 @@ def data_received_handler(data):
 
     GPIO.setup(TRIG, GPIO.OUT)
     GPIO.setup(ECHO, GPIO.IN)
-     
-    GPIO.output(TRIG,True)
-    time.sleep(0.0001)
-    GPIO.output(TRIG,False)
+    
+    GPIO.output(TRIG, GPIO.LOW)
+    time.sleep(0.5)
 
-    while GPIO.input(ECHO) == False:
-								start = time.time()
 
-    while GPIO.input(ECHO) == True:
-								end = time.time()
+    GPIO.output(TRIG,GPIO.HIGH)
+    time.sleep(0.00001)
+    GPIO.output(TRIG,GPIO.LOW)
+
+    while True:
+        pulso_inicio = time.time()
+        if GPIO.input(ECHO) == GPIO.HIGH:
+            break
+
+    while True:
+        pulso_fin = time.time()
+        if GPIO.input(ECHO) == GPIO.LOW:
+            break
 				
-    sig_time = end-start
+    duracion = pulso_fin-pulso_inicio
 
 				#cm
-    distance = round(sig_time / 0.000058 , 2)
+    distancia = (34300 * duracion)/2
 
-    print('{}'.format(distance))
-    s.send('{}'.format(distance));
+    if distancia > 200 :
+        distancia = 200
+    
+    print("Distancia: %.2f cm" %distancia)
+    
+    s.send(str(round(distancia,2)));
     GPIO.cleanup()
 
 s = BluetoothServer(data_received_handler,
